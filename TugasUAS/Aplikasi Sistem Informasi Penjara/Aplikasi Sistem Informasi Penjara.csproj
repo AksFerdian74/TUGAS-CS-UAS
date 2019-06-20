@@ -53,6 +53,12 @@
     <Compile Include="Anjing.Designer.cs">
       <DependentUpon>Anjing.cs</DependentUpon>
     </Compile>
+    <Compile Include="cchcgchcgc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cchcgchcgc.Designer.cs">
+      <DependentUpon>cchcgchcgc.cs</DependentUpon>
+    </Compile>
     <Compile Include="clsCRUD.cs" />
     <Compile Include="clsDB.cs" />
     <Compile Include="clsNAPI.cs" />
@@ -64,6 +70,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="cchcgchcgc.resx">
+      <DependentUpon>cchcgchcgc.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
