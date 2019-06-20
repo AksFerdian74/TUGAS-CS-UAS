@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Data;
 using System.Data.SqlClient;
 
 namespace App_Manajemen_Lapas
@@ -35,7 +27,7 @@ namespace App_Manajemen_Lapas
         // metod untuk membuka koneksi
         public void openConnection()
         {
-            if(connection.State == System.Data.ConnectionState.Closed)
+            if (connection.State == System.Data.ConnectionState.Closed)
             {
                 connection.Open();
             }
@@ -44,7 +36,7 @@ namespace App_Manajemen_Lapas
         // metod untuk menutup koneksi
         public void closeConnection()
         {
-            if(connection.State == System.Data.ConnectionState.Open)
+            if (connection.State == System.Data.ConnectionState.Open)
             {
                 connection.Close();
             }
@@ -57,10 +49,10 @@ namespace App_Manajemen_Lapas
             command = new SqlCommand();
         }
 
-        public DataTable Login(int bagAdmin,string username,string password)
+        public DataTable Login(int bagAdmin, string username, string password)
         {
             InsialisasiTable();
-            
+
             if (bagAdmin == 0)
                 query = string.Concat("SELECT * FROM tbMainAdmin WHERE Username =@usn AND Password =@pass");
             else

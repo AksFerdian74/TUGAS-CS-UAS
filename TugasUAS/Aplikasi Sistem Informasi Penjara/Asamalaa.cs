@@ -2,9 +2,9 @@
 
 namespace Aplikasi_Sistem_Informasi_Penjara
 {
-    public partial class LoginF : Form
+    public partial class Asamalaa : Form
     {
-        public LoginF()
+        public Asamalaa()
         {
             InitializeComponent();
         }

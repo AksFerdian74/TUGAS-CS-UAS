@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace App_Manajemen_Lapas
 {
@@ -28,8 +22,8 @@ namespace App_Manajemen_Lapas
 
         public void TambahNAPI(int idpenghunilapas, string jenisnapi, DateTime tglmasuk, string jenishukuman, string lamahukuman)
         {
-            DateTime tglkeluar =  tglmasuk.AddDays(Convert.ToDouble(lamahukuman));
-            
+            DateTime tglkeluar = tglmasuk.AddDays(Convert.ToDouble(lamahukuman));
+
             query = string.Concat("INSERT INTO tbNAPI VALUES (@idpenghunilapas,@jenisnapi,@tglmasuk,@jenishukuman,@lamahukuman,@tglHabisHukuman)");
 
             command = new SqlCommand(query, DBCSource.getConnection());
@@ -40,7 +34,7 @@ namespace App_Manajemen_Lapas
             command.Parameters.AddWithValue("@lamahukuman", lamahukuman);
             command.Parameters.AddWithValue("@tglHabisHukuman", tglkeluar);
             ExQuery(command);
-    
+
         }
 
         public void HapusNAPI(int IDNAPI)
@@ -52,7 +46,7 @@ namespace App_Manajemen_Lapas
             ExQuery(command);
         }
 
-        public void UbahNAPI(string gol,string jenisnapi,string lamahuk,int idNAP)
+        public void UbahNAPI(string gol, string jenisnapi, string lamahuk, int idNAP)
         {
             query = string.Concat("UPDATE tbNAPI SET JenisNAPI=@gol, JenisHukuman=@jhukuman, LamaHukuman=@lhukuman WHERE ID_NAPI=@idnapi;");
             command = new SqlCommand(query, DBCSource.getConnection());
@@ -67,7 +61,7 @@ namespace App_Manajemen_Lapas
         public void TambahBarang(int idPenghuniLapas, string NamaBarang, DateTime tglMasuk, int Jumlah, DateTime TglSuratMasuk)
         {
             query = String.Concat("INSERT INTO tbBarang VALUES(@idpenghuniLapas, @namabarang, @tglmasuk, @jumlah, @tglsuratmasuk)");
-            
+
             command = new SqlCommand(query, DBCSource.getConnection());
             command.Parameters.AddWithValue("@idpenghunilapas", idPenghuniLapas);
             command.Parameters.AddWithValue("@namabarang", NamaBarang);
@@ -86,7 +80,7 @@ namespace App_Manajemen_Lapas
             ExQuery(command);
         }
 
-        public void TambahPenghuniLapas(string nama, DateTime tglahir, string tmptlahir, string jeniskelamin, 
+        public void TambahPenghuniLapas(string nama, DateTime tglahir, string tmptlahir, string jeniskelamin,
             string agama, string pekerjaan, string pendidikan, string alamat, string keterangan)
         {
             query = string.Concat("INSERT INTO tbPenghuniLapas VALUES " +
@@ -106,14 +100,14 @@ namespace App_Manajemen_Lapas
             ExQuery(command);
         }
 
-        public void TambahAdmin(int id_Peng, string username,string password,string bagian)
+        public void TambahAdmin(int id_Peng, string username, string password, string bagian)
         {
-           // if (bagian == "Admin Bag. Narapidana")
+            // if (bagian == "Admin Bag. Narapidana")
             //    query = "INSERT INTO tbMainAdmin VALUES (@ID,@UN,@PASS);";
             //else
-                query = "INSERT INTO tbAdmin VALUES (@ID,@UN,@PASS,@BAG);";
+            query = "INSERT INTO tbAdmin VALUES (@ID,@UN,@PASS,@BAG);";
 
-            query = String.Concat(query,"UPDATE tbPenghuniLapas SET Status='Sipir' Where ID_PenghuniLapas = @ID;");
+            query = String.Concat(query, "UPDATE tbPenghuniLapas SET Status='Sipir' Where ID_PenghuniLapas = @ID;");
 
             command = new SqlCommand(query, DBCSource.getConnection());
             command.Parameters.AddWithValue("@ID", id_Peng);
@@ -125,11 +119,11 @@ namespace App_Manajemen_Lapas
 
         }
 
-        public void HapusAdmin(int id_Adm,int id_PLapas)
+        public void HapusAdmin(int id_Adm, int id_PLapas)
         {
-           // MessageBox.Show(id_PLapas.ToString());
+            // MessageBox.Show(id_PLapas.ToString());
             query = "DELETE FROM tbAdmin WHERE ID_Admin = @id";
-            query = String.Concat(query," UPDATE tbPenghuniLapas SET Status='' Where ID_PenghuniLapas = @idl;");
+            query = String.Concat(query, " UPDATE tbPenghuniLapas SET Status='' Where ID_PenghuniLapas = @idl;");
 
             command = new SqlCommand(query, DBCSource.getConnection());
             command.Parameters.AddWithValue("@id", id_Adm);
@@ -137,14 +131,14 @@ namespace App_Manajemen_Lapas
 
             ExQuery(command);
         }
-        public void GantiPassword(string un, string newPass,string tb = "tbAdmin")
+        public void GantiPassword(string un, string newPass, string tb = "tbAdmin")
         {
             query = "UPDATE tbMainAdmin SET Password=@newpass WHERE Username=@username";
 
             command = new SqlCommand(query, DBCSource.getConnection());
             command.Parameters.AddWithValue("@newpass", newPass);
             command.Parameters.AddWithValue("@username", un);
-           // command.Parameters.AddWithValue("@table", tb);
+            // command.Parameters.AddWithValue("@table", tb);
 
             ExQuery(command);
         }
